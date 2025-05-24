@@ -36,6 +36,7 @@
             "Tests\\": "tests/"
         }
     },
+
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -50,7 +51,12 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "post-install-cmd": [
+            "@php artisan config:cache",
+            "@php artisan route:cache",
+            "@php artisan view:cache"
+          ]
     },
     "extra": {
         "branch-alias": {
@@ -71,3 +77,4 @@
     "minimum-stability": "stable",
     "prefer-stable": true
 }
+
