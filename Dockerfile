@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY . /app
 
-RUN composer install --no-dev --optimize-autoloader && \
-    php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache && \
-    php artisan migrate --force
+RUN composer install --no-dev --optimize-autoloader
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
+RUN php artisan migrate --force
 
 EXPOSE 80
