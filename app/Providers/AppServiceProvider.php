@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+
+
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Artisan;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (app()->environment('production')) {
+            \Artisan::call('queue:work', ['--daemon' => true]);
+        }
     }
+
 }
