@@ -16,7 +16,6 @@ use \App\Http\Controllers\api\CopounController;
 use App\Http\Controllers\api\TransactionController;
 use App\Http\Controllers\api\WalletController;
 use App\Http\Controllers\api\DonationController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['changelanguage'], function () {
@@ -85,16 +84,3 @@ Route::group(['middleware' => ['auth:api', 'role:agent']], function () {
 Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     // Admins specific routes here...
 });
-
-
-if (env('APP_ENV') !== 'production') {
-    Route::get('/run-migrations', function () {
-        try {
-            Artisan::call('migrate', ['--force' => true]);
-            return response()->json(['message' => 'Migrations executed successfully']);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    });
-}
-
